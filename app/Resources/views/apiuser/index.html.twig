@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Apiusers list</h1>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Index</th>
+                <th>Indexstartat</th>
+                <th>Integer</th>
+                <th>Float</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Fullname</th>
+                <th>Email</th>
+                <th>Bool</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for apiUser in pagination %}
+            <tr>
+                <td><a href="{{ path('apiuser_show', { 'id': apiUser.id }) }}">{{ apiUser.id }}</a></td>
+                <td>{{ apiUser.index }}</td>
+                <td>{{ apiUser.indexStartAt }}</td>
+                <td>{{ apiUser.integer }}</td>
+                <td>{{ apiUser.float }}</td>
+                <td>{{ apiUser.name }}</td>
+                <td>{{ apiUser.surname }}</td>
+                <td>{{ apiUser.fullname }}</td>
+                <td>{{ apiUser.email }}</td>
+                <td>{% if apiUser.bool %}Yes{% else %}No{% endif %}</td>
+                <td><a href="{{ path('apiuser_edit', { 'id': apiUser.id }) }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation" style="clear: both; text-align: center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <ul>
+        <li>
+            <a href="{{ path('apiuser_new') }}">Create a new apiUser</a>
+        </li>
+    </ul>
+{% endblock %}
